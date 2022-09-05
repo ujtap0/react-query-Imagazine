@@ -6,7 +6,7 @@ function AppRoutes  () {
   return(
     <Routes>
       <Route path="/" element={<NavBar />}>
-        <Route index element={<div>메인페이지</div>}/>
+        <Route index element={<Main/>}/>
         <Route path="myPage" element={<div>마이페이지</div>}/>
       </Route>
     </Routes>

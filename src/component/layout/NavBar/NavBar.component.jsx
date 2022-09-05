@@ -1,11 +1,13 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
+import { signInWithGogglePopup } from "../../../service/firebase";
 
 const NavBar = () => {
+  const loginHandler = () => signInWithGogglePopup();
   return(
     <Fragment>
       <div>
-        네비게이션 바
+        <button onClick={loginHandler}>로그인</button>
       </div>
       <Outlet />
     </Fragment>
