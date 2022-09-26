@@ -1,8 +1,17 @@
 import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Routes from './Routes';
+
+const client = new QueryClient();
 
 function App() {
+
   return (
-    <div className="App"></div>
+    <QueryClientProvider client={client}>
+      <Routes />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 
