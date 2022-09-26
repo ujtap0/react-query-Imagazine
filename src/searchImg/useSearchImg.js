@@ -24,6 +24,7 @@ const useSearchImg = () => {
       return (page < totalPages) ? page + 1 : undefined;
     },
   })
+
   return{
     setSearchTerm,
     data,
