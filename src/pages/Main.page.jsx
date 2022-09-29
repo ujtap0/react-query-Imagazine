@@ -1,10 +1,10 @@
-import SearchImg from "../searchImg/SearchImg.component";
+import Images from "../searchImg/Images.component"
 
 const Main = () => {
   return(
-    <div>
-      <SearchImg />
-    </div>
+    <>
+      <Images />
+    </>
   )
 }
 export default Main

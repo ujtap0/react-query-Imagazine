@@ -1,21 +1,12 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const moveInput = css`
-  position: fixed;
-  width: 65%;
-  top: 0;
-  z-index: 100;
-  margin: 0;
-`
-
-export const SearchForm = styled.form`
+export const StyledForm = styled.form`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80px;
   margin: 260px 0;
-  ${({isData}) => isData && moveInput};
 `
 
 export const SearchInput = styled.input`
@@ -37,19 +28,4 @@ export const ButtonContainer = styled.div`
   height: 48px;
   display: flex;
   align-items: center;
-`
-
-export const ImgContainer = styled.div`
-  margin-top: 160px;
-  column-width: 300px;
-  column-gap : 10px;
-`
-
-export const ImgWrapper = styled.div`
-  width: 100%;
-  display: inline-block;
-  margin-bottom: 10px
-`;
-export const Img = styled.img`
-  width: 100%;
 `

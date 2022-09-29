@@ -1,12 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { signInWithGogglePopup } from "../../../service/firebase";
-import { Nav, NavContainer, ButtonContainer } from "./Nav.style";
+import { HeaderWrapper, HeaderContainer, ButtonContainer } from "./Header.style";
 import { getBookmark, getCurrentUser, googleSignOut } from "../../../service/firebase";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "../../../globalStyles";
+import SearchForm from "../../../searchImg/SearchForm.component";
 
-const NavBar = () => {
+const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
   const loginHandler = () => signInWithGogglePopup();
   const logoutHandler = () => googleSignOut();
@@ -26,20 +27,23 @@ const NavBar = () => {
 
   return(
     <Fragment>
-      <Nav>
-        <NavContainer>
+      <HeaderWrapper>
+        <HeaderContainer>
           <div>
             <h1>Imagazine</h1>
+          </div>
+          <div>
+            <SearchForm />
           </div>
           <ButtonContainer>
             {isLogin ? 
             <Button onClick={logoutHandler}>Logout</Button> : 
             <Button onClick={loginHandler}>Login</Button>}
           </ButtonContainer>
-        </NavContainer>
-      </Nav>
+        </HeaderContainer>
+      </HeaderWrapper>
       <Outlet />
     </Fragment>
   )
 }
-export default NavBar
+export default Header

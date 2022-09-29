@@ -2,16 +2,38 @@ import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const url = "https://api.unsplash.com/search/photos?";
-const fetchUrl = async (key , pageNum ) => {
-  const response = await axios.get(url,{
-    params:{
+const searchUrl = "https://api.unsplash.com/search/photos?";
+const defaultUrl = "https://api.unsplash.com//photos/random?";
+let url;
+let params;
+
+const fetchUrl = async (key , pageNum) => {
+  if(key.length > 0){
+    url = searchUrl;
+    params = {
       query: key,
-      page: pageNum,
+      pageNum: pageNum,
+      client_id: process.env.REACT_APP_UNSPLASH_KEY,
+    };
+  } else {
+    url = defaultUrl;
+    params = {
+      count: 10,
       client_id: process.env.REACT_APP_UNSPLASH_KEY,
     }
-  })
-  return {...response.data, page: pageNum};
+  }
+
+  const response = await axios.get(url,{params});
+
+  if(key.length > 0){
+    return {...response.data, page: pageNum, isSearch: true};
+  } else {
+    return {
+      results: [...response.data],
+      page: pageNum,
+      isSearh: false,
+    }
+  }
 }
 
 const useSearchImg = () => {
@@ -20,8 +42,13 @@ const useSearchImg = () => {
   ({queryKey , pageParam = 1}) => fetchUrl(queryKey[1], pageParam), 
   {
     getNextPageParam: (lastPage) => {
-      const {page, total_pages: totalPages} = lastPage;
-      return (page < totalPages) ? page + 1 : undefined;
+      if(lastPage.isSearch){
+        const {page, total_pages: totalPages} = lastPage;
+        return (page < totalPages) ? page + 1 : undefined;
+      } else {
+        const {page} = lastPage;
+        return page + 1;
+      }
     },
   })
 

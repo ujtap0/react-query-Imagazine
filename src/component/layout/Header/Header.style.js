@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Container } from "../../../globalStyles";
 
-export const Nav = styled.nav`
+export const HeaderWrapper = styled.header`
   width: 100%;
   height: 80px;
   display: flex;
@@ -12,7 +12,7 @@ export const Nav = styled.nav`
   z-index: 10;
 `;
 
-export const NavContainer = styled(Container)`
+export const HeaderContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
