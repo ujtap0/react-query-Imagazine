@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
 
 const searchUrl = "https://api.unsplash.com/search/photos?";
 const defaultUrl = "https://api.unsplash.com//photos/random?";
@@ -37,7 +38,8 @@ const fetchUrl = async (key , pageNum) => {
 }
 
 const useSearchImg = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('');
+  const [images, setImages] = useState([])
   const {data = [], fetchNextPage, hasNextPage, isFetching, isLoading} = useInfiniteQuery(['page', searchTerm], 
   ({queryKey , pageParam = 1}) => fetchUrl(queryKey[1], pageParam), 
   {
@@ -50,11 +52,20 @@ const useSearchImg = () => {
         return page + 1;
       }
     },
+    refetchOnWindowFocus: false,
+    staleTime: 6000000,
   })
+
+  useEffect(()=>{
+    if(isFetching){
+      setImages(data)
+    }
+  },[isFetching])
 
   return{
     setSearchTerm,
-    data,
+    images,
+    searchTerm,
     fetchNextPage,
     hasNextPage,
     isFetching,
