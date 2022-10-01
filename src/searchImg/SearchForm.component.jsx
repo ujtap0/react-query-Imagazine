@@ -1,12 +1,8 @@
 import React, {useRef} from 'react';
 import { Button } from "../globalStyles";
 import { StyledForm, SearchInput, ButtonContainer } from "./SearchForm.style";
-import useSearchImg from './useSearchImg';
 
-const SearchForm = () => {
-  const {
-    setSearchTerm,
-  } = useSearchImg();
+const SearchForm = ({setSearchTerm}) => {
 
   const searchRef = useRef();
 

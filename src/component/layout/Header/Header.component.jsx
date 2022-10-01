@@ -5,7 +5,6 @@ import { HeaderWrapper, HeaderContainer, ButtonContainer } from "./Header.style"
 import { getBookmark, getCurrentUser, googleSignOut } from "../../../service/firebase";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "../../../globalStyles";
-import SearchForm from "../../../searchImg/SearchForm.component";
 
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -31,9 +30,6 @@ const Header = () => {
         <HeaderContainer>
           <div>
             <h1>Imagazine</h1>
-          </div>
-          <div>
-            <SearchForm />
           </div>
           <ButtonContainer>
             {isLogin ? 

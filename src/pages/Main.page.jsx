@@ -1,4 +1,4 @@
-import Images from "../searchImg/Images.component"
+import Images from "../searchImg/Images.component";
 
 const Main = () => {
   return(
