@@ -6,16 +6,16 @@ export const HeaderWrapper = styled.header`
   height: 80px;
   display: flex;
   align-items: center;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
-  z-index: 10;
 `;
 
 export const HeaderContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 80px;
 `;
 
 export const ButtonContainer = styled.div`

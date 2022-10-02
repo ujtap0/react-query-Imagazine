@@ -6,7 +6,7 @@ export const StyledForm = styled.form`
   justify-content: center;
   align-items: center;
   height: 80px;
-  margin: 260px 0;
+  margin: 80px 0 100px;
 `
 
 export const SearchInput = styled.input`
