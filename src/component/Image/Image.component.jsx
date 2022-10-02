@@ -2,9 +2,16 @@ import React, {useState, useRef, useEffect} from 'react'
 import { Img } from './Image.style';
 import Modal from '../ui/Modal.component';
 
-const Image = ({src, alt, bg}) => {
+const Image = ({src, alt, bg, images, picIdx, fetchNextPage}) => {
   const [showModal, setShowModal] = useState(false);
+  const [currentImgIdx, setCurrentImgIdx] = useState(picIdx)
   const [isLoad, setIsLoad] = useState(false);
+
+  const showNextImg = () => setCurrentImgIdx(prev => prev + 1);
+  const showPrevImg = () => setCurrentImgIdx(prev => prev - 1);
+
+  const showModalHandler = () => setShowModal(true);
+  const hideModalHandler = () => setShowModal(false);
 
   const imgRef = useRef(null);
   const observer = useRef();
@@ -18,9 +25,6 @@ const Image = ({src, alt, bg}) => {
     })
   }
 
-  const showModalHandler = () => setShowModal(true);
-  const hideModalHandler = () => setShowModal(false);
-
   useEffect(()=>{
     if(!observer.current){
       observer.current = new IntersectionObserver(onIntersection);
@@ -28,11 +32,19 @@ const Image = ({src, alt, bg}) => {
     imgRef.current && observer.current.observe(imgRef.current)
   },[])
 
-  const imgData = {src, alt}
-
   return (
     <>
-      {showModal && <Modal onClose={hideModalHandler} imgData={imgData}/>}
+      {showModal && 
+        <Modal 
+          onClose={hideModalHandler} 
+          imgData={images[currentImgIdx]} 
+          nextImg={showNextImg}
+          prevImg={showPrevImg}
+          total={images.length}
+          current={currentImgIdx}
+          fetchNextPage={fetchNextPage}
+          />
+          }
       <Img ref={imgRef} src={isLoad ? src : ''} alt={alt} bg={bg} onClick={showModalHandler}/>
     </>
   )

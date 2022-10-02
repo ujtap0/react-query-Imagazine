@@ -4,6 +4,7 @@ import { Container } from "../globalStyles";
 import { ImgContainer, ImgWrapper } from "./Images.style";
 import Image from "../component/Image/Image.component";
 import SearchForm from "./SearchForm.component";
+import { useEffect, useState } from "react";
 
 const Images = () => {
   const {
@@ -14,7 +15,15 @@ const Images = () => {
     setSearchTerm
   } = useSearchImg();
 
-  console.log(images)
+  const [combinedImages, setImages] = useState([]);
+
+  useEffect(()=>{
+    if(images && images.length > 0){
+      const allImages = images.reduce((acc, cur) => [...acc, ...cur.results],[])
+      setImages(allImages)
+    }
+  },[images])
+
 
   if (isLoading) return <div>로딩중..</div>
 
@@ -23,7 +32,17 @@ const Images = () => {
       <SearchForm setSearchTerm={setSearchTerm}/>
       <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
         <ImgContainer>
-          {images && images.map(pageData => pageData.results.map(picture => <ImgWrapper key={picture.id}><Image src={picture.urls.regular} alt={picture.alt_description} bg={picture.color}/></ImgWrapper>))}
+          {combinedImages.length > 0 && 
+            combinedImages.map((picture, picIdx) => <ImgWrapper key={picture.id}>
+            <Image 
+              src={picture.urls.regular} 
+              alt={picture.alt_description} 
+              bg={picture.color}
+              images={combinedImages}
+              picIdx={picIdx} 
+              fetchNextPage={fetchNextPage}
+            />
+            </ImgWrapper>)}
         </ImgContainer>
       </InfiniteScroll>
     </Container>

@@ -55,7 +55,6 @@ const useSearchImg = () => {
   })
 
   const images = data?.pages
-  console.log(images)
 
   return{
     setSearchTerm,
