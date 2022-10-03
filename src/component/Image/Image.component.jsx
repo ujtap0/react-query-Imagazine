@@ -44,8 +44,8 @@ const Image = ({src, alt, bg, images, picIdx, fetchNextPage}) => {
           current={currentImgIdx}
           fetchNextPage={fetchNextPage}
           />
-          }
-      <Img ref={imgRef} src={isLoad ? src : ''} alt={alt} bg={bg} onClick={showModalHandler}/>
+        }
+      <Img ref={imgRef} src={isLoad ? src : null} alt={alt} bg={bg} onClick={showModalHandler}/>
     </>
   )
 }

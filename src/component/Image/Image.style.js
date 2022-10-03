@@ -6,4 +6,4 @@ export const Img = styled.img`
   object-fit: cover;
   display: block;
   background: ${({bg}) => bg};
-`
+`;

@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import ReactDOm from 'react-dom';
-import { Backdrop, StyledModal, ImgContent } from './Modal.styled';
+import { Backdrop, StyledModal, ImgContent, Btn } from './Modal.styled';
 
 const Background = ({onClose}) => {
   return <Backdrop onClick={onClose}></Backdrop>
@@ -9,9 +9,9 @@ const Background = ({onClose}) => {
 const ModalOverlay = ({imgData, nextImg, prevImg}) => {
   return(
     <StyledModal>
-      <button onClick={prevImg}>prev</button>
+      <Btn onClick={prevImg}>&lt;</Btn>
       <ImgContent src={imgData.urls.regular} alt={imgData.desciption}/>
-      <button onClick={nextImg}>next</button>
+      <Btn onClick={nextImg}>&gt;</Btn>
     </StyledModal>
   )
 }
@@ -27,10 +27,10 @@ const Modal = ({onClose, imgData, nextImg, prevImg, fetchNextPage, total, curren
   },[total, current])
 
   return(
-    <Fragment>
+    <>
       {ReactDOm.createPortal(<Background onClose={onClose} />, portalEl)}
       {ReactDOm.createPortal(<ModalOverlay nextImg={nextImg} imgData={imgData} prevImg={prevImg} />, portalEl)}
-    </Fragment>
+    </>
   )
 }
 
