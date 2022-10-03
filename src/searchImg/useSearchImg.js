@@ -9,10 +9,11 @@ let params;
 
 const fetchUrl = async (key , pageNum) => {
   if(key.length > 0){
+    console.log(pageNum);
     url = searchUrl;
     params = {
       query: key,
-      pageNum: pageNum,
+      page: pageNum,
       client_id: process.env.REACT_APP_UNSPLASH_KEY,
     };
   } else {
